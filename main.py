@@ -7,7 +7,7 @@ import os
 import urllib
 load_dotenv('.env')
 
-user = os.getenv('username')
+user = os.getenv('user')
 password = urllib.parse.quote(os.getenv('password'))
 client = MongoClient(f"mongodb://{user}:{password}@mongo.exceed19.online:8443/?authMechanism=DEFAULT")
 
@@ -67,10 +67,10 @@ def change_mode(mode):
     light = collection.update_many({}, {'$set': {'mode': mode}})
     return {'response': "mode changed"}
 
-    @app.patch("/dim")
+@app.patch("/dim")
 def dim_light(detail: Light):
     room = collection.find_one({"room": detail.room})
-    if detail.mode==0:
+    if detail.mode=='manual':
         room1 = collection.find_one_and_update({"room": detail.room},{'$set': {'light': detail.light}})
         if detail.light==0:
             light_set = collection.find_one_and_update({"room": detail.room},{'$set': {'state': False}})        
