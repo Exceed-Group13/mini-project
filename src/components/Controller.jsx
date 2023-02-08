@@ -19,6 +19,19 @@ const Controller = (props) => {
         .then(data => this.setState({ postId: data.id }));
     }
 
+    function manageDim(room, dim) {
+        const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "light": dim,
+            "room": room
+        })
+    };
+    fetch('https://ecourse.cpe.ku.ac.th/exceed13/dim', requestOptions)
+        .then(response => response.json())
+        .then(data => this.setState({ postId: data.id }));
+    }
 
     useEffect(() => {
         if (props.data) {
@@ -56,7 +69,7 @@ const Controller = (props) => {
                     <h2 className='on'>ON</h2>
                     </div>
                     <div className="range">
-                        <input type="range" className="form-range" id="customRange1" disabled={!controller} min="0" max="255"></input>
+                        <input type="range" className="form-range" id="customRange1" disabled={!controller} min="0" max="255" onChange={(e) => manageDim(props.data.room, e.target.value)}></input>
                     </div>
                 </div> 
             </div>
