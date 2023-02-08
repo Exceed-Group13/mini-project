@@ -5,6 +5,20 @@ import React , { useEffect, useState } from 'react'
 const Controller = (props) => {
     const [controller, setController] = useState(false)
 
+    function manageSwitch(room, state) {
+        const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "state": !state,
+            "room": room
+        })
+    };
+    fetch('https://ecourse.cpe.ku.ac.th/exceed13/light/control', requestOptions)
+        .then(response => response.json())
+        .then(data => this.setState({ postId: data.id }));
+    }
+
 
     useEffect(() => {
         if (props.data) {
@@ -37,7 +51,7 @@ const Controller = (props) => {
                     <div className="form-switch">
                     <h2 className='off'>OFF</h2>
                     <div className='box'>
-                        <input className="form-check-input" type="checkbox" checked={controller} onChange={(e) => setController(e.target.checked)}/>
+                        <input className="form-check-input" type="checkbox" checked={controller} onChange={(e) => manageSwitch(props.data.room, props.data.state)}/>
                     </div>
                     <h2 className='on'>ON</h2>
                     </div>
