@@ -46,8 +46,8 @@ data = [{
 }]
 
 app = FastAPI()
-collection.delete_many({})
-a = collection.insert_many(data)
+# collection.delete_many({})
+# a = collection.insert_many(data)
 
 @app.get("/lights")
 def get_lights():
@@ -58,22 +58,29 @@ def get_lights():
         tmp.append(l)
     return {'result': tmp}
 
-@app.patch("/light/control")
+@app.put("/light/control")
 def control_light(command: Command):
     """Turn on and turn off a light."""
+    if command.room < 1 or command.room > 3:
+        return HTTPException(status_code=400)
     light = collection.find_one_and_update({'room': command.room}, 
         {'$set': {'state': command.state}})
     return {'response': "success"}
 
-@app.patch("/lights/mode/{mode}")
+@app.put("/lights/mode/{mode}")
 def change_mode(mode):
     """Change lights mode."""
+    lst_word = ["auto", "manual"]
+    if mode.lower() not in lst_word:
+        return HTTPException(status_code=400)
     light = collection.update_many({}, {'$set': {'mode': mode}})
     return {'response': "mode changed"}
 
-@app.patch("/dim")
+@app.put("/dim")
 def dim_light(detail: Dim):
     room1 = collection.find_one_and_update({"room": detail.room},{'$set': {'light': detail.light, 'state': True}})
     if detail.light == 0:
-        light_set = collection.find_one_and_update({"room": detail.room},{'$set': {'state': False}})        
+        light_set = collection.find_one_and_update({"room": detail.room},{'$set': {'state': False}})   
+    elif detail.light < 0 or detail.light > 255:
+        return HTTPException(status_code=400)
     return {'response': "changed light itensity"}
