@@ -14,9 +14,9 @@ const Control = () => {
 
   return (
     <div className='container'>
-        <Controller Name='Bedroom' />
-        <Controller Name='Kitchen'/>
-        <Controller Name='Louge'/>
+        <Controller Name='Bedroom' led={"led1"}/>
+        <Controller Name='Kitchen' led={"led2"}/>
+        <Controller Name='Louge' led={"led3"}/>
     </div>
 
   )
