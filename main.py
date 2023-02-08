@@ -24,6 +24,10 @@ class Command(BaseModel):
     state: bool
     room: int
     
+class Dim(BaseModel):
+    light: int
+    room: int
+    
 data = [{
     "state": False,
     "room": 1,
@@ -68,14 +72,8 @@ def change_mode(mode):
     return {'response': "mode changed"}
 
 @app.patch("/dim")
-def dim_light(detail: Light):
-    room = collection.find_one({"room": detail.room})
-    if detail.mode=='manual':
-        room1 = collection.find_one_and_update({"room": detail.room},{'$set': {'light': detail.light}})
-        if detail.light==0:
-            light_set = collection.find_one_and_update({"room": detail.room},{'$set': {'state': False}})        
-    ans = {"state": detail.state,
-            "room": detail.room,
-            "mode": detail.mode,
-            "light": detail.light}
-    return ans
+def dim_light(detail: Dim):
+    room1 = collection.find_one_and_update({"room": detail.room},{'$set': {'light': detail.light, 'state': True}})
+    if detail.light == 0:
+        light_set = collection.find_one_and_update({"room": detail.room},{'$set': {'state': False}})        
+    return {'response': "changed light itensity"}
