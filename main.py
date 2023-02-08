@@ -29,18 +29,22 @@ class Command(BaseModel):
 data = [{
     "state": False,
     "room": 1,
-    "mode": 0,
+    "mode": "manual",
     "light": 0
 },{
     "state": False,
     "room": 2,
-    "mode": 0,
+    "mode": "manual",
     "light": 0
 },{
     "state": False,
     "room": 3,
+<<<<<<< HEAD
     "mode": 1,
     "mode": 0,
+=======
+    "mode": "manual",
+>>>>>>> 621eed22e06cf78e8afd7d4319953d51d0c84554
     "light": 0
 }]
 
@@ -54,24 +58,21 @@ app = FastAPI()
 
 @app.get("/lights")
 def get_lights():
-    """1) ให้ปิดเปิดหลอดไฟผ่านปุ่ม โดยการเปิดจะแยกแต่ละห้องใช้คนละปุ่ม 
-    และให้ปิดเปิดหลอดไฟผ่านเว็บ ให้มีฟังก์ชั่นคล้ายกับปุ่ม"""
+    """Check the status of all lights in every room."""
     light = collection.find({}, {'_id':0})
     tmp = list()
     for l in light:
         tmp.append(l)
-    #     print(l)
-    # print(tmp)
     return {'result': tmp}
 
 @app.patch("/light/control")
 def control_light(command: Command):
-    """1) ให้ปิดเปิดหลอดไฟผ่านปุ่ม โดยการเปิดจะแยกแต่ละห้องใช้คนละปุ่ม 
-    และให้ปิดเปิดหลอดไฟผ่านเว็บ ให้มีฟังก์ชั่นคล้ายกับปุ่ม"""
+    """Turn on and turn off a light."""
     light = collection.find_one_and_update({'room': command.room}, 
         {'$set': {'state': command.state}})
     return {'response': "success"}
 
+<<<<<<< HEAD
 @app.patch("/dim")
 def dim_light(detail: Light):
     room = collection.find_one({"room": detail.room})
@@ -84,3 +85,10 @@ def dim_light(detail: Light):
             "mode": detail.mode,
             "light": detail.light}
     return ans
+=======
+@app.patch("/lights/mode/{mode}")
+def change_mode(mode):
+    """Change lights mode."""
+    light = collection.update_many({}, {'$set': {'mode': mode}})
+    return {'response': "mode changed"}
+>>>>>>> 621eed22e06cf78e8afd7d4319953d51d0c84554
