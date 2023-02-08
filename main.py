@@ -22,6 +22,10 @@ class Light(BaseModel):
     mode: bool
     light: int
     
+class Command(BaseModel):
+    state: bool
+    room: int
+    
 data = [{
     "state": False,
     "room": 1,
@@ -35,11 +39,16 @@ data = [{
 },{
     "state": False,
     "room": 3,
+<<<<<<< HEAD
     "mode": 1,
+=======
+    "mode": 0,
+>>>>>>> aac5dc3743d3b30b3f5fa433f88f4a206706d294
     "light": 0
 }]
 
 app = FastAPI()
+<<<<<<< HEAD
 #collection.delete_many({})
 # a = collection.insert_many(data)
 
@@ -55,3 +64,27 @@ def dim_light(detail: Light):
             "mode": detail.mode,
             "light": detail.light}
     return ans
+=======
+collection.delete_many({})
+a = collection.insert_many(data)
+
+@app.get("/lights")
+def get_lights():
+    """1) ให้ปิดเปิดหลอดไฟผ่านปุ่ม โดยการเปิดจะแยกแต่ละห้องใช้คนละปุ่ม 
+    และให้ปิดเปิดหลอดไฟผ่านเว็บ ให้มีฟังก์ชั่นคล้ายกับปุ่ม"""
+    light = collection.find({}, {'_id':0})
+    tmp = list()
+    for l in light:
+        tmp.append(l)
+    #     print(l)
+    # print(tmp)
+    return {'result': tmp}
+
+@app.patch("/light/control")
+def control_light(command: Command):
+    """1) ให้ปิดเปิดหลอดไฟผ่านปุ่ม โดยการเปิดจะแยกแต่ละห้องใช้คนละปุ่ม 
+    และให้ปิดเปิดหลอดไฟผ่านเว็บ ให้มีฟังก์ชั่นคล้ายกับปุ่ม"""
+    light = collection.find_one_and_update({'room': command.room}, 
+        {'$set': {'state': command.state}})
+    return {'response': "success"}
+>>>>>>> aac5dc3743d3b30b3f5fa433f88f4a206706d294
