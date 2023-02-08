@@ -17,7 +17,7 @@ collection = db['miniproject'] # db.collection_name
 class Light(BaseModel):
     state: bool
     room: int
-    mode: bool
+    mode: str
     light: int
     
 class Command(BaseModel):
@@ -27,17 +27,17 @@ class Command(BaseModel):
 data = [{
     "state": False,
     "room": 1,
-    "mode": 0,
+    "mode": "manual",
     "light": 0
 },{
     "state": False,
     "room": 2,
-    "mode": 0,
+    "mode": "manual",
     "light": 0
 },{
     "state": False,
     "room": 3,
-    "mode": 0,
+    "mode": "manual",
     "light": 0
 }]
 
@@ -47,20 +47,22 @@ a = collection.insert_many(data)
 
 @app.get("/lights")
 def get_lights():
-    """1) ให้ปิดเปิดหลอดไฟผ่านปุ่ม โดยการเปิดจะแยกแต่ละห้องใช้คนละปุ่ม 
-    และให้ปิดเปิดหลอดไฟผ่านเว็บ ให้มีฟังก์ชั่นคล้ายกับปุ่ม"""
+    """Check the status of all lights in every room."""
     light = collection.find({}, {'_id':0})
     tmp = list()
     for l in light:
         tmp.append(l)
-    #     print(l)
-    # print(tmp)
     return {'result': tmp}
 
 @app.patch("/light/control")
 def control_light(command: Command):
-    """1) ให้ปิดเปิดหลอดไฟผ่านปุ่ม โดยการเปิดจะแยกแต่ละห้องใช้คนละปุ่ม 
-    และให้ปิดเปิดหลอดไฟผ่านเว็บ ให้มีฟังก์ชั่นคล้ายกับปุ่ม"""
+    """Turn on and turn off a light."""
     light = collection.find_one_and_update({'room': command.room}, 
         {'$set': {'state': command.state}})
     return {'response': "success"}
+
+@app.patch("/lights/mode/{mode}")
+def change_mode(mode):
+    """Change lights mode."""
+    light = collection.update_many({}, {'$set': {'mode': mode}})
+    return {'response': "mode changed"}
