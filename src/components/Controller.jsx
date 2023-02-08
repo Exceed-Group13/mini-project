@@ -1,4 +1,7 @@
 import React , { useEffect } from 'react'
+import MaterialUISlide from './MaterialUISlide'
+import CustomizedSlider from './MaterialUISlide'
+import { MaterialUISwitch } from './MaterialUISwitch'
 // import { Link } from 'react-router-dom'
 // import '/App.css'
 
@@ -28,15 +31,17 @@ const Controller = (props) => {
                     <br/>
                     <h1 >{props.Name}</h1>
                     <br/>
-                    <div className="form-switch">
-                    <h2 className='off'>OFF</h2>
-                    <div className='box'>
-                        <input className="form-check-input" type="checkbox" />
+                    <br/>
+
+
+                    <br/>
+                    <div>
+                        <span style={{fontSize:"40px"}}>OFF</span>
+                        <MaterialUISwitch/>
+                        <span style={{fontSize:"40px"}}>ON</span>
                     </div>
-                    <h2 className='on'>ON</h2>
-                    </div> 
-                    <div className="range">
-                        <input type="range" class="form-range" id="customRange1"></input>
+                    <div>
+                    <MaterialUISlide/>
                     </div>
                 </div> 
             </div>
