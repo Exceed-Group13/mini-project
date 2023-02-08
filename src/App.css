@@ -59,7 +59,7 @@ html{
 .component{
   display: flex;
   flex-shrink: 2rem;
-  padding: 5rem;
+  padding: 3rem;
 }
 
 .container {
