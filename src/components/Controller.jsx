@@ -17,6 +17,9 @@ console.log(pros)
                     <div className="form-check form-switch">
                         <input className="form-check-input" type="checkbox" />
                     </div> 
+                    <div className="range">
+                        <input type="range" class="form-range" id="customRange1"></input>
+                    </div>
                 </div> 
             </div>
         </div>
