@@ -8,7 +8,7 @@
 const char *ssid = "dani";
 const char *password = "212224236248";
 const String baseUrl =
-    "http://ecourse.cpe.ku.ac.th/exceed13/"; // changed url to my group
+    "https://ecourse.cpe.ku.ac.th/exceed13"; // changed url to my group
 const String result, mode1, mode2, mode3;
 JsonArray result_array;
 bool state1, state2, state3;
