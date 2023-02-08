@@ -28,11 +28,12 @@ const Controller = (props) => {
                     <br/>
                     <h1 >{props.Name}</h1>
                     <br/>
-                    <h2>OFF</h2>
-                    <br/>
-                    <h2>ON</h2>
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" value={`${props.led} open`} onChange={(ev) => manageCheckBox(props.led, ev)}/>
+                    <div className="form-switch">
+                    <h2 className='off'>OFF</h2>
+                    <div className='box'>
+                        <input className="form-check-input" type="checkbox" />
+                    </div>
+                    <h2 className='on'>ON</h2>
                     </div> 
                     <div className="range">
                         <input type="range" class="form-range" id="customRange1"></input>
