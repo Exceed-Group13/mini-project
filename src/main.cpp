@@ -40,10 +40,10 @@ void setup() {
   digitalWrite(RED,0);
   //ledcWrite(0,255);
   Connect_Wifi();
-  //xTaskCreatePinnedToCore(light01, "light1", 1024, NULL, 1, NULL, 1);
-  //xTaskCreatePinnedToCore(light02, "light2", 1024, NULL, 1, NULL, 1);
-  //xTaskCreatePinnedToCore(light03, "light3", 1024, NULL, 1, NULL, 1);
-  xTaskCreatePinnedToCore(get_data, "get_data", 20480, NULL, 1, NULL, 0);
+  xTaskCreatePinnedToCore(light01, "light1", 1024, NULL, 1, NULL, 1);
+  xTaskCreatePinnedToCore(light02, "light2", 1024, NULL, 1, NULL, 1);
+  xTaskCreatePinnedToCore(light03, "light3", 1024, NULL, 1, NULL, 1);
+  //xTaskCreatePinnedToCore(get_data, "get_data", 20480, NULL, 1, NULL, 0);
 }
 
 void loop() {
@@ -53,17 +53,17 @@ void loop() {
 void get_data(void* param)
 {
   GET_value();
-
+  vTaskDelay(5000/portTICK_PERIOD_MS);
 }
 void light01(void* param)
 {
   while(true)
   {
-    if(mode1 == "manual")
+    if(true)
     {
       if(tRead(13))
       {
-        Serial.println("HI");
+        //Serial.println("HI");
         if(state){
            digitalWrite(GREEN,1);
            state = !state;
@@ -73,17 +73,18 @@ void light01(void* param)
           state = !state;
         }
       }
-      if(state1 == 0)
+      else if(state1)
       {
         digitalWrite(GREEN,1);
       }
-      else
+      else if(!state1)
       {
         digitalWrite(GREEN,0);
       }
     }
     else
     {
+      Serial.println(analogRead(LDR));
       if(analogRead(LDR) < 4095)
       {
         digitalWrite(GREEN,1);
@@ -92,7 +93,8 @@ void light01(void* param)
       {
         digitalWrite(GREEN,0);
       }
-    } 
+    }
+    vTaskDelay(10/portTICK_PERIOD_MS); 
   }
 }
 int state02 = 0;
@@ -100,7 +102,7 @@ void light02(void* param)
 {
   while(true)
   {
-    if(mode2 == "manual")
+    if(true)
     {
       if(tRead2(15))
       {
@@ -113,11 +115,11 @@ void light02(void* param)
            state02 = !state02;
         }
       }
-      if(state2 == 0)
+      else if(state2)
       {
         digitalWrite(YELLOW,1);
       }
-      else
+      else if(!state2)
       {
         digitalWrite(YELLOW,0);
       }
@@ -133,6 +135,7 @@ void light02(void* param)
         digitalWrite(YELLOW,0);
       }
     }
+    vTaskDelay(10/portTICK_PERIOD_MS);
   }
 }
 int state03 = 0;
@@ -140,7 +143,7 @@ void light03(void* param)
 {
   while(true)
   {
-    if(mode3 == "manual")
+    if(true)
     {
       if(tRead3(12))
       {
@@ -153,11 +156,11 @@ void light03(void* param)
            state03 = !state03;
         }
       }
-      if(state3 == 0)
+      else if(state3)
       {
         digitalWrite(RED,1);
       }
-      else
+      else if(!state3)
       {
         digitalWrite(RED,0);
       }
@@ -173,6 +176,6 @@ void light03(void* param)
         digitalWrite(RED,0);
       }
     }
+    vTaskDelay(10/portTICK_PERIOD_MS);
   }
 }
-
