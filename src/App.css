@@ -13,6 +13,10 @@
   }
 }
 
+html{
+  background-color: #282c34;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -52,12 +56,14 @@
   width: 70%;
 }
 
-
 .component{
-  margin: 0 auto;
   display: flex;
   flex-shrink: 2rem;
   padding: 5rem;
+}
+
+.container {
+  display: flex;
 }
 
 .room1{
@@ -111,6 +117,4 @@
   }
 }
 
-.container {
-  display: flex;
-}
+
