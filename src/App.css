@@ -118,7 +118,9 @@ html{
   text-align: center;
 }
 
-
+.slide {
+  margin-left: 20px;
+}
 
 @keyframes App-logo-spin {
   from {

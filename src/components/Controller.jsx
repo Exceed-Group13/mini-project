@@ -88,6 +88,7 @@ const Controller = (props) => {
               <Box sx={{ m: 3 }} />
               <Typography gutterBottom>Tooltip value label</Typography>
               <Slider
+                className="slide"
                 valueLabelDisplay="auto"
                 onChange={(e) => {
                   manageDim(props.data.room, e.target.value);
