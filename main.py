@@ -30,6 +30,9 @@ class Dim(BaseModel):
     light: int
     room: int
     
+class Mode(BaseModel):
+    mode: str
+    
 data = [{
     "state": False,
     "room": 1,
@@ -78,13 +81,13 @@ def control_light(command: Command):
         {'$set': {'state': command.state}})
     return {'response': "success"}
 
-@app.put("/lights/mode/{mode}")
-def change_mode(mode):
+@app.put("/lights/mode")
+def change_mode(mode: Mode):
     """Change lights mode."""
     lst_word = ["auto", "manual"]
-    if mode.lower() not in lst_word:
+    if mode.mode.lower() not in lst_word:
         return HTTPException(status_code=400)
-    light = collection.update_many({}, {'$set': {'mode': mode}})
+    light = collection.update_many({}, {'$set': {'mode': mode.mode}})
     return {'response': "mode changed"}
 
 @app.put("/dim")
