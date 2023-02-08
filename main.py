@@ -5,10 +5,12 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
 import urllib
+from fastapi.middleware.cors import CORSMiddleware
+
 load_dotenv('.env')
 
 user = os.getenv('user')
-password = urllib.parse.quote(os.getenv('password'))
+password = urllib.parse.quote(str(os.getenv('password')))
 client = MongoClient(f"mongodb://{user}:{password}@mongo.exceed19.online:8443/?authMechanism=DEFAULT")
 
 db = client["exceed13"] #use database name
@@ -48,6 +50,15 @@ data = [{
 app = FastAPI()
 # collection.delete_many({})
 # a = collection.insert_many(data)
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/lights")
 def get_lights():
