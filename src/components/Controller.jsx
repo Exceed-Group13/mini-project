@@ -5,10 +5,17 @@ import React from 'react'
 const Controller = () => {
 
 	return (
-		<div className='box'>
-            <h1 className='room'>Name</h1>
-            <h3>On</h3>
-            <h3>Off</h3>
+		<div className="component">
+            <div className="room1">
+                <div className="Bedroom">
+                    <br/>
+                    <h1 >Bedroom</h1>
+                    <br/>
+                    <h2>OFF</h2>
+                    <br/>
+                    <h2>ON</h2>
+                </div>  
+            </div>
         </div>
 	)
 }
