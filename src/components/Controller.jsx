@@ -3,15 +3,19 @@ import React , { useEffect, useState } from 'react'
 // import '/App.css'
 
 const Controller = (props) => {
-    const [Controller, setController] = useState(false)
+    const [controller, setController] = useState(false)
 
-    console.log(props)
-    useEffect(()=>{
-        setInterval(() => {
-            console.log("Tick!")
-        },1000)
-    },[])
 
+    useEffect(() => {
+        if (props.data) {
+            setController(props.data.state)
+            console.log('data',props.data.state)
+        }
+    } , [props.data])
+
+    useEffect(() => {
+        console.log(controller)
+    },[controller])
 
     function manageCheckBox(led,ev) {
         if (ev.target.checked) {
@@ -33,12 +37,12 @@ const Controller = (props) => {
                     <div className="form-switch">
                     <h2 className='off'>OFF</h2>
                     <div className='box'>
-                        <input className="form-check-input" type="checkbox" value={`${props.led} open`} onChange={(e) => setController(e.target.checked)}/>
+                        <input className="form-check-input" type="checkbox" checked={controller} onChange={(e) => setController(e.target.checked)}/>
                     </div>
                     <h2 className='on'>ON</h2>
                     </div>
                     <div className="range">
-                        <input type="range" class="form-range" id="customRange1" disabled={Controller}></input>
+                        <input type="range" className="form-range" id="customRange1" disabled={!controller} min="0" max="255"></input>
                     </div>
                 </div> 
             </div>
