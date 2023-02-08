@@ -54,6 +54,7 @@
 
 
 .component{
+  margin: 0 auto;
   display: flex;
   flex-shrink: 2rem;
   padding: 5rem;
@@ -70,6 +71,7 @@
 
 .Bedroom{
   text-align: center;
+  
 }
 
 .room2{
@@ -105,4 +107,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.container {
+  display: flex;
 }

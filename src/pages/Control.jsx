@@ -13,10 +13,10 @@ const Control = () => {
 //   }, [])
 
   return (
-    <div>
-        <Controller />
-        <Controller />
-        <Controller />
+    <div className='container'>
+        <Controller Name='Bedroom' />
+        <Controller Name='Kitchen'/>
+        <Controller Name='Louge'/>
     </div>
 
   )
