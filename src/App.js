@@ -1,6 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './pages/Home';
+import Control from './pages/Control';
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
           test
         </a>
         <Home />
+        <Control />
       </header>
     </div>
   );
