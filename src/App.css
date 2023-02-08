@@ -28,6 +28,76 @@
   color: #61dafb;
 }
 
+.buttonCtrl{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10%;
+}
+
+.divButton{
+  display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.imgAuto{
+  width: 70%;
+}
+
+
+.component{
+  display: flex;
+  flex-shrink: 2rem;
+  padding: 5rem;
+}
+
+.room1{
+  width: 360px;
+  margin: 0 auto;
+  height: 560px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.75);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.Bedroom{
+  text-align: center;
+}
+
+.room2{
+  width: 360px;
+  margin: 0 auto;
+  height: 560px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.75);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.lounge{
+  text-align: center;
+}
+
+.room3{
+  width: 360px;
+  margin: 0 auto;
+  height: 560px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.75);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.kit{
+  text-align: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
