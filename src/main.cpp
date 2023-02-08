@@ -55,6 +55,7 @@ void get_data(void* param)
   GET_value();
   vTaskDelay(5000/portTICK_PERIOD_MS);
 }
+
 void light01(void* param)
 {
   while(true)
@@ -63,13 +64,15 @@ void light01(void* param)
     {
       if(tRead(13))
       {
-        //Serial.println("HI");
+        Serial.println("HI");
         if(state){
            digitalWrite(GREEN,1);
+           state1 = 1;
            state = !state;
         }
         else {
           digitalWrite(GREEN,0);
+          state1 = 0;
           state = !state;
         }
       }
@@ -94,7 +97,7 @@ void light01(void* param)
         digitalWrite(GREEN,0);
       }
     }
-    vTaskDelay(10/portTICK_PERIOD_MS); 
+    vTaskDelay(100/portTICK_PERIOD_MS); 
   }
 }
 int state02 = 0;
@@ -108,10 +111,12 @@ void light02(void* param)
       {
         if(state02){
            digitalWrite(YELLOW,1);
+           state2 = 1;
            state02 = !state02;
         }
         else {
           digitalWrite(YELLOW,0);
+          state2 = 0;
            state02 = !state02;
         }
       }
@@ -135,7 +140,7 @@ void light02(void* param)
         digitalWrite(YELLOW,0);
       }
     }
-    vTaskDelay(10/portTICK_PERIOD_MS);
+    vTaskDelay(100/portTICK_PERIOD_MS);
   }
 }
 int state03 = 0;
@@ -149,10 +154,12 @@ void light03(void* param)
       {
         if(state03){
            digitalWrite(RED,1);
+           state3 = 1;
            state03 = !state03;
         }
         else {
           digitalWrite(RED,0);
+          state3 = 0;
            state03 = !state03;
         }
       }
@@ -176,6 +183,6 @@ void light03(void* param)
         digitalWrite(RED,0);
       }
     }
-    vTaskDelay(10/portTICK_PERIOD_MS);
+    vTaskDelay(100/portTICK_PERIOD_MS);
   }
 }
