@@ -38,7 +38,7 @@ const Control = () => {
     <div className='container'>
         <Controller Name='Bedroom' led={"led1"} data={data[0]}/>
         <Controller Name='Kitchen' led={"led2"} data={data[1]}/>
-        <Controller Name='Louge' led={"led3"} data={data[2]}/>
+        <Controller Name='Lounge' led={"led3"} data={data[2]}/>
     </div>
 
   )
