@@ -5,6 +5,8 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
+import MaterialUISlide from './MaterialUISlide'
+import CustomizedSlider from './MaterialUISlide'
 // import { Link } from 'react-router-dom'
 // import '/App.css'
 

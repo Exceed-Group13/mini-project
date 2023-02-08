@@ -1,5 +1,10 @@
 import { styled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
+import * as React from 'react';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 150,
