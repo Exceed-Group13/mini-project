@@ -7,12 +7,11 @@ const Home = () => {
         <h1>Light Control</h1>
         <div className="divButton">
             <Link to="/auto">
-                <Button className="buttonCtrl">automatic</Button>
+                <Button className="buttonCtrl">Automatic</Button>
             </Link>
-            {/* <Link to="/auto">
-            <img src="https://i.ibb.co/ySzJWH5/auto.png" className="imgAuto"/>
-            </Link> */}
-            <Button className="buttonCtrl">Manual</Button>
+            <Link to="/manual">
+                <Button className="buttonCtrl">Manual</Button>
+            </Link>
         </div>
         </div>
     );
